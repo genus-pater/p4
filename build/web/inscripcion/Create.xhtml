@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InscripcionCreateDlg" widgetVar="InscripcionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInscripcionTitle}">
+            <h:form id="InscripcionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inscripcionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInscripcionLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{inscripcionController.selected.fecha}" title="#{bundle.EditInscripcionTitle_fecha}" required="true" requiredMessage="#{bundle.EditInscripcionRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInscripcionLabel_equipo}" for="equipo" />
+                        <p:selectOneMenu id="equipo" value="#{inscripcionController.selected.equipo}" required="true" requiredMessage="#{bundle.EditInscripcionRequiredMessage_equipo}">
+                            <f:selectItems value="#{equipoController.itemsAvailableSelectOne}"
+                                           var="equipoItem"
+                                           itemValue="#{equipoItem}" itemLabel="#{equipoItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInscripcionLabel_disciplinaTorneo}" for="disciplinaTorneo" />
+                        <p:selectOneMenu id="disciplinaTorneo" value="#{inscripcionController.selected.disciplinaTorneo}" required="true" requiredMessage="#{bundle.EditInscripcionRequiredMessage_disciplinaTorneo}">
+                            <f:selectItems value="#{disciplinaTorneoController.itemsAvailableSelectOne}"
+                                           var="disciplinaTorneoItem"
+                                           itemValue="#{disciplinaTorneoItem}" itemLabel="#{disciplinaTorneoItem.torneo.descripcion}-#{disciplinaTorneoItem.disciplina.nombre}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inscripcionController.create}" value="#{bundle.Save}" update="display,:InscripcionListForm:datalist,:growl" oncomplete="handleSubmit(args,'InscripcionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('InscripcionCreateDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

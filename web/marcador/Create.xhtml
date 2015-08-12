@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MarcadorCreateDlg" widgetVar="MarcadorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMarcadorTitle}">
+            <h:form id="MarcadorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{marcadorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMarcadorLabel_marcadorPK_idMarcador}" for="marcadorPK_idMarcador" />
+                        <p:inputText id="marcadorPK_idMarcador" value="#{marcadorController.selected.marcadorPK.idMarcador}" title="#{bundle.CreateMarcadorTitle_marcadorPK_idMarcador}" required="true" requiredMessage="#{bundle.CreateMarcadorRequiredMessage_marcadorPK_idMarcador}"/>
+                        <p:outputLabel value="#{bundle.CreateMarcadorLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{marcadorController.selected.descripcion}" title="#{bundle.CreateMarcadorTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateMarcadorLabel_disciplina}" for="disciplina" />
+                        <p:selectOneMenu id="disciplina" value="#{marcadorController.selected.disciplina}" required="true" requiredMessage="#{bundle.EditMarcadorRequiredMessage_disciplina}">
+                            <f:selectItems value="#{disciplinaController.itemsAvailableSelectOne}"
+                                           var="disciplinaItem"
+                                           itemValue="#{disciplinaItem}" itemLabel="#{disciplinaItem.nombre}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{marcadorController.create}" value="#{bundle.Save}" update="display,:MarcadorListForm:datalist,:growl" oncomplete="handleSubmit(args,'MarcadorCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('MarcadorCreateDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

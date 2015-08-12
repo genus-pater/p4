@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PartidoEditDlg" widgetVar="PartidoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPartidoTitle}">
+            <h:form id="PartidoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{partidoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPartidoLabel_partidoPK_idPartido}" for="partidoPK_idPartido" />
+                        <p:inputText id="partidoPK_idPartido" value="#{partidoController.selected.partidoPK.idPartido}" title="#{bundle.EditPartidoTitle_partidoPK_idPartido}" required="true" requiredMessage="#{bundle.EditPartidoRequiredMessage_partidoPK_idPartido}"/>
+                        <p:outputLabel value="#{bundle.EditPartidoLabel_nueroPartido}" for="nueroPartido" />
+                        <p:inputText id="nueroPartido" value="#{partidoController.selected.nueroPartido}" title="#{bundle.EditPartidoTitle_nueroPartido}" />
+                        <p:outputLabel value="#{bundle.EditPartidoLabel_equiposAJugar}" for="equiposAJugar" />
+                        <p:selectOneMenu id="equiposAJugar" value="#{partidoController.selected.equiposAJugar}" required="true" requiredMessage="#{bundle.EditPartidoRequiredMessage_equiposAJugar}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{equiposAJugarController.itemsAvailableSelectOne}"
+                                           var="equiposAJugarItem"
+                                           itemValue="#{equiposAJugarItem}" itemLabel="ENCUENTRO:#{equiposAJugarItem.encuentro.idEncuentro}-#{equiposAJugarItem.encuentro.fecha}-#{equiposAJugarItem.inscripcion.equipo.nombre}-#{equiposAJugarItem.inscripcion.disciplinaTorneo.disciplina.nombre}-#{equiposAJugarItem.inscripcion.disciplinaTorneo.torneo.descripcion}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{partidoController.update}" value="#{bundle.Save}" update="display,:PartidoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PartidoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('PartidoEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

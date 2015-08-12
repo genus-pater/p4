@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClasificatoriaViewDlg" widgetVar="ClasificatoriaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewClasificatoriaTitle}">
+            <h:form id="ClasificatoriaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clasificatoriaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewClasificatoriaLabel_clasificatoriaPK_idClasificatoria}"/>
+                        <h:outputText value="#{clasificatoriaController.selected.clasificatoriaPK.idClasificatoria}" title="#{bundle.ViewClasificatoriaTitle_clasificatoriaPK_idClasificatoria}"/>
+                        <h:outputText value="#{bundle.ViewClasificatoriaLabel_descripcion}"/>
+                        <h:outputText value="#{clasificatoriaController.selected.descripcion}" title="#{bundle.ViewClasificatoriaTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewClasificatoriaLabel_tipoClasificatoria}"/>
+                        <h:outputText value="#{clasificatoriaController.selected.tipoClasificatoria.descripcion}" title="#{bundle.ViewClasificatoriaTitle_tipoClasificatoria}"/>
+                        <h:outputText value="#{bundle.ViewClasificatoriaLabel_inscripcion}"/>
+                        <h:outputText value="#{clasificatoriaController.selected.inscripcion.equipo.nombre}-#{clasificatoriaController.selected.inscripcion.disciplinaTorneo.disciplina.nombre}-#{clasificatoriaController.selected.inscripcion.disciplinaTorneo.torneo.descripcion}" title="#{bundle.ViewClasificatoriaTitle_inscripcion}"/>
+                        <h:outputText value="#{bundle.ViewClasificatoriaLabel_idEstadoClasificatoria}"/>
+                        <h:outputText value="#{clasificatoriaController.selected.idEstadoClasificatoria.descripcion}" title="#{bundle.ViewClasificatoriaTitle_idEstadoClasificatoria}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('ClasificatoriaViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

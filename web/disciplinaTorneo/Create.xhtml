@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DisciplinaTorneoCreateDlg" widgetVar="DisciplinaTorneoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDisciplinaTorneoTitle}">
+            <h:form id="DisciplinaTorneoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{disciplinaTorneoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDisciplinaTorneoLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{disciplinaTorneoController.selected.fecha}" title="#{bundle.EditDisciplinaTorneoTitle_fecha}" required="true" requiredMessage="#{bundle.EditDisciplinaTorneoRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDisciplinaTorneoLabel_torneo}" for="torneo" />
+                        <p:selectOneMenu id="torneo" value="#{disciplinaTorneoController.selected.torneo}" required="true" requiredMessage="#{bundle.EditDisciplinaTorneoRequiredMessage_torneo}">
+                            <f:selectItems value="#{torneoController.itemsAvailableSelectOne}"
+                                           var="torneoItem"
+                                           itemValue="#{torneoItem}" itemLabel="#{torneoItem.descripcion}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDisciplinaTorneoLabel_disciplina}" for="disciplina" />
+                        <p:selectOneMenu id="disciplina" value="#{disciplinaTorneoController.selected.disciplina}" required="true" requiredMessage="#{bundle.EditDisciplinaTorneoRequiredMessage_disciplina}">
+                            <f:selectItems value="#{disciplinaController.itemsAvailableSelectOne}"
+                                           var="disciplinaItem"
+                                           itemValue="#{disciplinaItem}" />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{disciplinaTorneoController.create}" value="#{bundle.Save}" update="display,:DisciplinaTorneoListForm:datalist,:growl" oncomplete="handleSubmit(args,'DisciplinaTorneoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('DisciplinaTorneoCreateDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

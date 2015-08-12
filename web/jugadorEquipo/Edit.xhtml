@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="JugadorEquipoEditDlg" widgetVar="JugadorEquipoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditJugadorEquipoTitle}">
+            <h:form id="JugadorEquipoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{jugadorEquipoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditJugadorEquipoLabel_NJugador}" for="NJugador" />
+                        <p:inputText id="NJugador" value="#{jugadorEquipoController.selected.NJugador}" title="#{bundle.EditJugadorEquipoTitle_NJugador}" />
+                        <p:outputLabel value="Foto" for="Foto" />
+                        <p:inputText id="Foto" value="#{jugadorEquipoController.selected.foto}" title="Foto" />
+                        <p:outputLabel value="#{bundle.EditJugadorEquipoLabel_jugador}" for="jugador" />
+                        <p:selectOneMenu id="jugador" value="#{jugadorEquipoController.selected.jugador}" required="true" requiredMessage="#{bundle.EditJugadorEquipoRequiredMessage_jugador}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{jugadorController.itemsAvailableSelectOne}"
+                                           var="jugadorItem"
+                                           itemValue="#{jugadorItem}" itemLabel="#{jugadorItem.nombre} #{jugadorItem.apellido}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditJugadorEquipoLabel_equipo}" for="equipo" />
+                        <p:selectOneMenu id="equipo" value="#{jugadorEquipoController.selected.equipo}" required="true" requiredMessage="#{bundle.EditJugadorEquipoRequiredMessage_equipo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{equipoController.itemsAvailableSelectOne}"
+                                           var="equipoItem"
+                                           itemValue="#{equipoItem}" itemLabel="#{equipoItem.nombre}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{jugadorEquipoController.update}" value="#{bundle.Save}" update="display,:JugadorEquipoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'JugadorEquipoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('JugadorEquipoEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

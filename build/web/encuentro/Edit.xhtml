@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EncuentroEditDlg" widgetVar="EncuentroEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEncuentroTitle}">
+            <h:form id="EncuentroEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{encuentroController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEncuentroLabel_idEncuentro}" for="idEncuentro" />
+                        <p:inputText id="idEncuentro" value="#{encuentroController.selected.idEncuentro}" title="#{bundle.EditEncuentroTitle_idEncuentro}" required="true" requiredMessage="#{bundle.EditEncuentroRequiredMessage_idEncuentro}"/>
+                        <p:outputLabel value="#{bundle.EditEncuentroLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{encuentroController.selected.fecha}" title="#{bundle.EditEncuentroTitle_fecha}" required="true" requiredMessage="#{bundle.EditEncuentroRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEncuentroLabel_disciplinaTorneo}" for="disciplinaTorneo" />
+                        <p:selectOneMenu id="disciplinaTorneo" value="#{encuentroController.selected.disciplinaTorneo}" required="true" requiredMessage="#{bundle.EditEncuentroRequiredMessage_disciplinaTorneo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{disciplinaTorneoController.itemsAvailableSelectOne}"
+                                           var="disciplinaTorneoItem"
+                                           itemValue="#{disciplinaTorneoItem}" itemLabel="#{disciplinaTorneoItem.disciplina.nombre}-#{disciplinaTorneoItem.torneo.descripcion}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEncuentroLabel_idCancha}" for="idCancha" />
+                        <p:selectOneMenu id="idCancha" value="#{encuentroController.selected.idCancha}" required="true" requiredMessage="#{bundle.EditEncuentroRequiredMessage_idCancha}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{canchaController.itemsAvailableSelectOne}"
+                                           var="idCanchaItem"
+                                           itemValue="#{idCanchaItem}" itemLabel="#{idCanchaItem.ubicacion}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEncuentroLabel_idArbitro}" for="idArbitro" />
+                        <p:selectOneMenu id="idArbitro" value="#{encuentroController.selected.idArbitro}" required="true" requiredMessage="#{bundle.EditEncuentroRequiredMessage_idArbitro}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{arbitroController.itemsAvailableSelectOne}"
+                                           var="idArbitroItem"
+                                           itemValue="#{idArbitroItem}" itemLabel="#{idArbitroItem.nombre} #{idArbitroItem.apellido}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{encuentroController.update}" value="#{bundle.Save}" update="display,:EncuentroListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EncuentroEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('EncuentroEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

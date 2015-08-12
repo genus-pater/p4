@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquiposAJugarViewDlg" widgetVar="EquiposAJugarViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEquiposAJugarTitle}">
+            <h:form id="EquiposAJugarViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equiposAJugarController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEquiposAJugarLabel_equiposAJugarPK_idEquiposAJugar}"/>
+                        <h:outputText value="#{equiposAJugarController.selected.equiposAJugarPK.idEquiposAJugar}" title="#{bundle.ViewEquiposAJugarTitle_equiposAJugarPK_idEquiposAJugar}"/>
+                        <h:outputText value="#{bundle.ViewEquiposAJugarLabel_numeroParticipante}"/>
+                        <h:outputText value="#{equiposAJugarController.selected.numeroParticipante}" title="#{bundle.ViewEquiposAJugarTitle_numeroParticipante}"/>
+                        <h:outputText value="#{bundle.ViewEquiposAJugarLabel_inscripcion}"/>
+                        <h:outputText value="##{equiposAJugarController.selected.inscripcion.equipo.nombre}-#{equiposAJugarController.selected.inscripcion.disciplinaTorneo.disciplina.nombre}-#{equiposAJugarController.selected.inscripcion.disciplinaTorneo.torneo.descripcion}" title="#{bundle.ViewEquiposAJugarTitle_inscripcion}"/>
+                        <h:outputText value="#{bundle.ViewEquiposAJugarLabel_encuentro}"/>
+                        <h:outputText value="#{equiposAJugarController.selected.encuentro.fecha}" title="#{bundle.ViewEquiposAJugarTitle_encuentro}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('EquiposAJugarViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

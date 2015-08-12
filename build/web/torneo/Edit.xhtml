@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TorneoEditDlg" widgetVar="TorneoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTorneoTitle}">
+            <h:form id="TorneoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{torneoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTorneoLabel_idTorneo}" for="idTorneo" />
+                        <p:inputText id="idTorneo" value="#{torneoController.selected.idTorneo}" title="#{bundle.EditTorneoTitle_idTorneo}" required="true" requiredMessage="#{bundle.EditTorneoRequiredMessage_idTorneo}"/>
+                        <p:outputLabel value="#{bundle.EditTorneoLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{torneoController.selected.fechaInicio}" title="#{bundle.EditTorneoTitle_fechaInicio}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTorneoLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{torneoController.selected.fechaFin}" title="#{bundle.EditTorneoTitle_fechaFin}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTorneoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{torneoController.selected.descripcion}" title="#{bundle.EditTorneoTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditTorneoLabel_estado}" for="estado" />
+                        <p:selectBooleanCheckbox id="estado" value="#{torneoController.selected.estado}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{torneoController.update}" value="#{bundle.Save}" update="display,:TorneoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TorneoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('TorneoEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

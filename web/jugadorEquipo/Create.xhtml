@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="JugadorEquipoCreateDlg" widgetVar="JugadorEquipoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateJugadorEquipoTitle}">
+            <h:form id="JugadorEquipoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{jugadorEquipoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateJugadorEquipoLabel_NJugador}" for="NJugador" />
+                        <p:inputText id="NJugador" value="#{jugadorEquipoController.selected.NJugador}" title="#{bundle.CreateJugadorEquipoTitle_NJugador}" />
+                        <p:outputLabel value="#{bundle.CreateJugadorEquipoLabel_jugador}" for="jugador" />
+                        <p:selectOneMenu id="jugador" value="#{jugadorEquipoController.selected.jugador}" required="true" requiredMessage="#{bundle.EditJugadorEquipoRequiredMessage_jugador}">
+                            <f:selectItems value="#{jugadorController.itemsAvailableSelectOne}"
+                                           var="jugadorItem"
+                                           itemValue="#{jugadorItem}" itemLabel="#{jugadorItem.nombre} #{jugadorItem.apellido}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateJugadorEquipoLabel_equipo}" for="equipo" />
+                        <p:selectOneMenu id="equipo" value="#{jugadorEquipoController.selected.equipo}" required="true" requiredMessage="#{bundle.EditJugadorEquipoRequiredMessage_equipo}">
+                            <f:selectItems value="#{equipoController.itemsAvailableSelectOne}"
+                                           var="equipoItem"
+                                           itemValue="#{equipoItem}" itemLabel="#{equipoItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Foto" for="Foto" />
+                        <p:inputText id="Foto" value="#{jugadorEquipoController.selected.foto}" title="Foto" />
+                        <p:outputLabel value="Terminos:"/>
+                        <p:scrollPanel style="width:50%;height:200px" id="sr">
+                            <h6>
+                                <p>CONTRATO DE TÉRMINOS Y CONDICIONES QUE CELEBRAN POR UNA PARTE EL USUARIO Y POR OTRA PARTE HUN, AL TENOR DE LAS SIGUIENTES CLÁUSULAS.
+                                    C L Á U SU L A S</p>
+
+                                <p>PRIMERA. Definiciones.
+                                    Para la interpretación de los términos del presente Contrato, se entiende por:
+                                    a) Cliente: Persona física que utiliza la plataforma de Torneo de Ideas para publicar un Torneo a fin de obtener un logotipo, un diseño, un nombre o cualquier otro trabajo creativo para su empresa.
+                                    b) Creativo: Persona física que participa en el Torneo, proporcionando al Cliente un logotipo, un diseño, un nombre o cualquier otro trabajo creativo.
+                                    c) Torneo: Concurso que publica el Cliente en el Sitio Web (Oferta Pública de Contratación), en el que se especifican las características y requisitos que deberán cumplir las propuestas de los Creativos, así como la duración del concurso, el número de ganadores que el Cliente podrá seleccionar, la contraprestación que se pagará al Creativo ganador, entre otras características de la misma naturaleza.
+                                    d) Propuesta u Obra: Soluciones de diseño, publicidad, mercadotecnia, arquitectura y, en general, cualquier trabajo creativo que presente el Creativo en un Torneo, en los términos y con las características que señale el Cliente en su publicación.
+                                    e) Miembro: Persona física que se inscribe en el Sitio Web a fin de participar activamente en los Torneos, y cuyos datos personales y/o sensibles se registrarán en la base de datos de TDI.
+                                    f) Plataforma: Sitio Web que TDI pone a disposición de los usuarios a fin de prestar sus servicios de intermediación.
+                                    g) Sitio, Sitio Web o Sitio de Internet: El Nombre de Dominio www.torneodeideas.com, del que es titular Crowd Solutions, S.A.P.I. de C.V.
+                                </p>
+                                <p>SEGUNDA. Legalidad.
+                                    2.1 Los servicios de TDI estarán a disposición de personas mayores de 18 años de edad. Las personas que desean hacer uso de este sitio web deberán contar con capacidad jurídica para contraer y ejercer derechos y obligaciones sin limitación alguna.
+
+                                    2.2 El usuario deberá leer y aceptar en su totalidad las cláusulas contenidas en estos Términos y Condiciones previo a su inscripción como miembro. TDI se reserva el derecho de negar, suspender o dar por terminado el servicio a cualquier usuario del sitio.
+
+                                    TERCERA. Uso del Sitio.
+                                    3.1 El usuario se obliga a usar el Sitio y sus servicios correspondientes únicamente para propósitos lícitos. Durante el uso del Sitio y sus servicios, el usuario deberá abstenerse de realizar las siguientes conductas:
+                                </p>
+                                <p> a. Registrarse bajo un nombre falso y/o usar un correo electrónico o dirección no autorizados o válidos;
+                                    b. Usar la cuenta de otra persona sin previa autorización;
+                                    c. Publicar un torneo / proyecto registrado en el Sitio Web de TDI en algún otro sitio web;
+                                    d. Hacer uso del Sitio si es menor de edad o está incapacitado legalmente para contraer obligaciones. La misma restricción aplicará para el caso de que se encuentre suspendido temporalmente o indefinidamente del Sitio;
+                                    e. Hacer uso de un método de pago inválido o no autorizado;
+                                    f. Hacer uso de una identidad falsa o hacerse pasar por algún otro usuario en cualquier torneo;
+                                    g. Presentar material que pudiera infringir o vulnerar derechos de terceros, violar la Ley o contribuir o alentar a conductas infractoras, ilegales o de naturaleza obscena;
+                                    h. Modificar las características y requerimientos del torneo cuando ya se haya seleccionado un ganador;
+                                    i. Manipular los precios de cualquier torneo;
+                                    j. Manipular la cuota de cobro de TDI o el proceso de pago;
+                                    k. Publicar contenidos falsos o difamatorios, incluyendo información personal de los socios de TDI o sus miembros;
+                                    l. Transferir su cuenta o número de usuario a terceras personas sin previo consentimiento de TDI;
+                                    m. Distribuir o publicar contenido no deseado, por ejemplo, correos cadena o “spam”;
+                                    n. Distribuir virus o cualquier otra tecnología que dañe a TDI, al Sitio o a los intereses o propiedades de los usuarios;
+                                    o. Copiar, modificar o distribuir contenido del Sitio sin el consentimiento de sus titulares o infringir derechos de propiedad industrial, por ejemplo, marcas registradas; y,
+                                    p. Obtener información personal de los usuarios sin su consentimiento, por ejemplo, correo electrónico, nombre o direcciones.
+                                </p>
+                                <p>    3.2 El usuario acepta que no utilizará ningún método automatizado para acceder al Sitio sin previo consentimiento por escrito de TDI. Adicionalmente, el usuario se obliga a abstenerse de: (a) tomar cualquier acción que imponga o que pueda imponer, a discreción de TDI, una carga irrazonable o desproporcionada que exceda la capacidad de la infraestructura técnica de TDI; (b) copiar, reproducir, modificar o crear trabajos derivados del contenido que se muestra en el Sitio sin previo consentimiento por escrito de TDI y/o del Creador del contenido; (c) interferir o intentar interferir con el correcto funcionamiento del Sitio o cualquiera de las actividades que se realicen en él; (d) Evadir o intentar evadir cualquier método de seguridad que TDI imponga para restringir el acceso a determinados vínculos en el Sitio.
+
+                                    3.3 TDI autoriza a los buscadores públicos que utilizan métodos automatizados para copiar contenido del Sitio, siempre que dicha conducta tenga como único propósito promover la publicidad del Sitio en Internet.
+
+                                    3.4 TDI estará facultado para investigar cualquier denuncia de incumplimiento o posible incumplimiento del presente Contrato, y en su caso, a adoptar todas las medidas que considere oportunas, a su exclusiva discreción, incluyendo el reporte o denuncia de conductas fraudulentas ante las autoridades respectivas y su cooperación en la investigación de conductas ilícitas.
+
+                                    CUARTA. Reserva de derechos.
+                                    4.1 TDI se reserva el derecho, a su exclusiva discreción, de suspender de manera inmediata cualquier torneo o transacción, prevenir o restringir el acceso al Sitio o a sus servicios, o tomar cualquier otra acción en caso de que se presenten problemas de la siguiente índole: técnicos, material objetable, torneos imprecisos, torneos categorizados de manera inapropiada, inexactitudes, torneos o contenido ilegal, procedimientos o acciones que estén prohibidas por sus políticas o normas, o por cualquier otra razón de la misma naturaleza.
+
+                                    4.2 TDI no avala ningún contenido enviado al Sitio, ni opiniones, recomendaciones o consejos expresados por los usuarios en el Sitio. TDI se deslinda de la responsabilidad de cualquier tipo que derive del contenido enviado por los Usuarios, mismos que son directamente responsables del contenido que publiquen en el Sitio.
+                                    Los Usuarios enuncian a ejercer cualquier tipo de acción en contra de TDI que tenga relación con el contenido del material que se publique en la plataforma de TDI o en su Sitio.
+
+                                    QUINTA. Servicios.
+                                    5.1 El Sitio que provee TDI es un espacio donde los Clientes pueden publicar torneos para recibir servicios creativos. Los Creativos deberán entregar trabajos originales, de conformidad con los requerimientos que publiquen los Clientes. Los Clientes deberán seleccionar la o las propuestas que más les agraden y que cumpla con los mencionados requerimientos.
+
+                                    5.2 TDI proporciona el Sitio para el intercambio entre Clientes y Creativos. En ese sentido, TDI sólo llevará a cabo las funciones de intermediación en las transacciones entre Clientes y Creativos.
+                                    Para el cumplimiento de las funciones de TDI como intermediario conforme a los establecido en los presentes Términos y Condiciones, el Cliente deberá de entregar a TDI la cantidad total que represente la oferta económica en el Torneo que publique, misma que será retenida como depósito en garantía por TDI para asegurar el cumplimiento de las obligaciones que surgieren con base en el presente contrato.
+                                    Además de la entrega del total de la contraprestación que se publique en la oferta pública de contratación de servicio a través del Torneo, el Cliente estará obligado a entregar a TDI una cantidad equivalente al 20% de la contraprestación ofertada en el Torneo como pago por los servicios de intermediación.
+                                </p>
+                                <p>
+
+                                    SEXTA. De los contratos entre Clientes y Creativos.
+                                    6.1 Al registrarse como miembro, el usuario reconoce y acepta que contratará directamente con otro miembro del Sitio para comprar o vender servicios.
+
+                                    6.2 Al publicar un Torneo, el Cliente deberá hacer uso del Contrato (“Contrato del Torneo”) proporcionado por TDI a fin de completar una transacción con un Creativo. Para estar en posibilidad de entregar una propuesta, los Creativos deberán conocer y en su caso, aceptar los términos del Contrato del Torneo.
+
+                                    6.3 Los Creativos no estarán obligados a participar en todos los Torneos que se publiquen en TDI.
+
+                                    6.4 Una vez que el torneo haya finalizado, el Cliente deberá seleccionar una o varias propuestas ganadoras dentro del término de siete (7) días naturales.
+
+                                    El Cliente que seleccione una propuesta como ganadora deberá pagar una contraprestación por la cesión de los derechos sobre la propuesta seleccionada. De manera simultánea, el Creativo ganador deberá subir o colocar los archivos fuente al sitio www.torneodeideas.com, dentro de un término de 5 (cinco) días naturales, en los términos y con las especificaciones que se establecen en el Contrato del Torneo. En caso de incumplimiento, el Creativo quedará descalificado del Torneo con todas sus propuestas y el Cliente deberá seleccionar a algún otro Creativo como ganador.
+
+                                    6.5 Para el caso de que no se haya seleccionado ganador dentro del plazo antes mencionado, el Cliente autoriza a TDI para seleccionar una propuesta y realizar el pago a su nombre y por su cuenta, de los fondos recibidos del depósito en garantía que se efectúe en los términos del punto 5.2 de los presentes Términos y Condiciones. En ese sentido, el Cliente autoriza a TDI para liberar los fondos necesarios a fin de pagar la contraprestación al Creativo.
+
+                                    6.6 El Cliente que requiera hacer efectiva la "Política de Garantía”, deberá enviar a TDI una solicitud de reembolso, dentro de un plazo de siete (7) días naturales, contados a partir de la conclusión del Torneo publicado. Si la "Política de Garantía" es utilizada se suspenderá el acceso al cliente a la plataforma de manera temporal por protección de las obras a los creativos. La suspensión se liberará hasta desasignar al cliente del servicio ejecutado y los creativos participantes hayan sido notificados de la cancelación del mismo en un plazo máximo de dos semanas a partir de la fecha de reembolso.
+
+                                    6.7 Al registrarse como miembro, el usuario se obliga a actuar de buena fe y a cumplir con el Contrato del Torneo. TDI tendrá facultades para suspender, terminar o llevar a cabo las acciones legales que sean necesarias, a su exclusiva discreción, para la protección del valor y reputación de TDI.
+
+                                    SÉPTIMA. Impuestos y derechos.
+                                    7.1 Cada miembro será responsable de los impuestos que se causen por sus actividades, de conformidad con la Ley. TDI será responsable únicamente de los impuestos que se causen por el monto de las comisiones que cobre por las transacciones entre Clientes y Creativos, y no así por las cantidades que reciba por concepto de depósito en garantía en los términos establecidos en lo Términos y Condiciones.
+
+                                    OCTAVA. Materiales de terceros.
+                                    8.1 TDI podrá proporcionar vínculos a páginas web de terceros. El usuario reconoce y acepta que TDI no será responsable de examinar o evaluar el contenido de cualquier material, producto, servicio o páginas web de terceros, ni respecto de la disponibilidad o exactitud del contenido.
+
+                                    TDI no será responsable por el uso sobre los materiales, productos, servicios o páginas web de terceros.
+
+                                    NOVENA. Publicaciones del usuario.
+                                    9.1 El usuario acepta que será responsable de las publicaciones y, en general, de todo el contenido que plasme dentro del Sitio, así como de las consecuencias que, en su caso, se deriven de tales publicaciones.
+
+                                    9.2 Salvo prueba en contrario, se presume que los miembros que envían propuestas, publicaciones o comentarios al Sitio, son titulares de los derechos de propiedad sobre los contenidos o, en su caso, han adquirido las licencias o permisos necesarios para hacer uso de tales contenidos.
+
+                                    DÉCIMA. Cuotas.
+                                    10.1 TDI no cobrará cuota alguna por la simple navegación a través del Sitio Web, ni por el registro para inscripción como miembro del Sitio.
+
+                                    10.2 TDI cobrará una cuota a los Clientes por el uso de sus servicios de intermediación, en particular, por la publicación de Torneos. Todas las cantidades deberán ser examinadas, y en su caso, aceptadas por el usuario previo a la publicación de un Torneo. Todas las cuotas que se expresan en el Sitio estarán referenciadas en pesos mexicanos (MXP).
+
+                                    El Usuario será responsable de pagar puntualmente a TDI mediante un método de pago válido. Se consideran métodos de pago válidos los siguientes: a) Pagos electrónicos a través de PayPal. B) pago en depósito de tiendas de autoservicio. C) Depósito bancarios.
+
+                                    DÉCIMA PRIMERA. Responsabilidad.
+                                    11.1 El usuario reconoce y acepta que el uso de este Sitio será bajo su propio riesgo y responsabilidad. El usuario reconoce y acepta que TDI, sus socios, directores, empleados o agentes no serán responsables por las acciones que los Usuarios y miembros del Sitio realicen.
+
+                                    11.2 TDI llevará a cabo las mejores prácticas al prestar el servicio de intermediación, sin embargo, no se obliga a garantizar el acceso continuo o seguro al Sitio o a sus servicios. El usuario reconoce y acepta que las operaciones del Sitio podrían ser afectadas por factores externos a TDI, lo cual no generará responsabilidad para TDI, sus socios, directores, empleados o agentes.
+
+                                    11.3 TDI no será responsable por la calidad, identidad, legalidad o confiabilidad de los materiales contenidos en las páginas web de terceros.
+
+                                    11.4 Adicionalmente, el usuario reconoce y acepta que TDI no será responsable por la calidad, identidad, legalidad o confiabilidad de los servicios proporcionados por los Creativos, la exactitud de los Torneos publicados o la información de los miembros y sus habilidades.
+
+                                    11.5 El usuario reconoce y acepta que TDI, sus socios, directores, empleados o agentes no serán parte en las disputas o controversias que en su caso llegaren a surgir entre los miembros del Sitio.
+
+                                    11.6 TDI, sus socios, directores, empleados o agentes no serán responsables por ningún daño, incluyendo, de manera enunciativa más no limitativa, la pérdida de beneficios, la pérdida de oportunidades de negocio o la pérdida de prestigio o reputación de los miembros del Sitio.
+
+
+                                    DÉCIMO SEGUNDA. Indemnización.
+                                    12.1 El usuario deberá indemnizar a TDI, sus socios, directores, empleados o agentes por cualquier pérdida, costos, gastos, daños u otros pasivos, incluyendo honorarios de abogados, en los que incurra TDI por costos, responsabilidad, pérdida, daño, causa de acción, reclamo, demanda, procedimiento o recurso interpuesto por un tercero en contra de TDI en relación con el uso de los servicios o el uso del servicio por medio de su cuenta, incluyendo las obligaciones de pago; o (b) resultado de: (i) el uso del Sitio (ii) la decisión de ingresar la información de crédito a través del Sitio, incluyendo información financiera personal, (iii) su decisión de presentar publicaciones y aceptar ofertas de otros países miembros, (iv) cualquier incumplimiento de contrato u otras reclamaciones hechas por los miembros con los que se llevó a cabo negocios a través del Sitio, (v) el incumplimiento de cualquier disposición de estos Términos y Condiciones, (vi) cualquier responsabilidad derivada del tratamiento fiscal de los pagos o cualquier parte de éstos, (vii ) cualquier negligencia por cualquier miembro, (viii) cualquier acto u omisión en relación con el pago de las cuotas; (ix) la disputa o falta de pago de cualquier factura o cualesquier otro pago; (x)violación a cualquier derecho de tercero de propiedad intelectual , y / o (x) sus obligaciones frente a otro miembro del Sitio.
+
+                                    DÉCIMO TERCERA. Propiedad industrial e intelectual.
+                                    13.1 Al ingresar al contenido de este Sitio, el usuario autoriza a TDI para usar, reproducir, distribuir, preparar trabajos derivados de, y mostrar y representar el contenido en relación con el Sitio, en cualquier medio conocido o por conocerse.
+
+                                    13.2 Sujeto a estos Términos y Condiciones, TDI autoriza a los miembros del Sitio para acceder y usar el Sitio, con el único propósito de adquirir y prestar los servicios ofrecidos por los Creativos. Está terminantemente prohibido vender, reproducir, distribuir, modificar, mostrar, preparar trabajos derivados de o usar cualquier material encontrado en www.torneodeideas.com, sin previo consentimiento por escrito del titular de los derechos, o en su caso, de TDI. El usuario se obliga a abstenerse de interferir o intentar interferir con las operaciones de TDI.
+
+                                    13.3 El usuario reconoce que TDI es el titular de todos los derechos sobre patentes, invenciones, marcas, derechos de autor, know-how, secretos comerciales, y en general, de todos los derechos de propiedad industrial e intelectual. El usuario reconoce y acepta que el logotipo y el nombre “Torneo de Ideas” son marcas registradas de TDI. El usuario reconoce y acepta que los demás nombres comerciales, logotipos y símbolos contenidos en www.torneodeideas.com pueden ser marcas registradas de algún titular distinto de TDI.
+
+                                    13.4 El usuario deberá reportar cualquier problema, contenido ofensivo o prohibido, así como violaciones a las políticas de uso del Sitio de TDI o a los derechos de terceros, incluyendo los derechos de los titulares de registros de marcas o derechos de autor.
+
+                                    DÉCIMA CUARTA. Notificaciones.
+                                    14.1 TDI se comunicará con los miembros del Sitio a través de correo electrónico y a través del Sitio Web.
+
+                                    El usuario autoriza a TDI para hacer uso de la dirección de correo electrónico proporcionada en el proceso de inscripción al Sitio. Adicionalmente, el usuario acepta recibir notificaciones de TDI a través de medios electrónicos y reconoce que dichas notificaciones se tendrán por recibidas 24 horas después de ser enviadas, salvo que se informe a TDI que la dirección electrónica es inválida o cuando se publiquen dichas notificaciones en el Sitio. El usuario deberá mantener su dirección de correo electrónico actualizada, y deberá revisar continuamente el Sitio para cerciorarse de conocer las notificaciones.
+
+                                    14.2 El usuario reconoce y acepta que todas las notificaciones dirigidas a TDI se considerarán recibidas sólo bajo un acuse de recibo. La dirección de correo electrónico para notificar a TDI es la siguiente: info@torneodeideas.com
+
+                                    DÉCIMO QUINTA. Resolución de controversias.
+                                    15.1 En caso de alguna controversia con TDI, el usuario deberá contactar a TDI a fin de llegar a un acuerdo para resolver la controversia. El usuario tendrá, en todo tiempo, derecho a presentar su reclamación ante un juez para que decida sobre la controversia.
+
+                                    15.2 El usuario reconoce y acepta que estos Términos y Condiciones se rigen por las leyes de los Estados Unidos Mexicanos y que toda demanda o queja en contra de TDI deberá presentarse ante las autoridades del Distrito Federal, o ante los tribunales federales, renunciando a cualquier fuero que pudiere corresponderle en razón de su domicilio, presente o futuro.
+
+                                    DÉCIMO SEXTA. Terminación.
+                                    16.1 Estos Términos y Condiciones se harán efectivos pulsando clic en “Acepto”. Si el usuario no está de acuerdo con las presentes condiciones, no deberá pulsar clic en “Acepto” y deberá abstenerse de utilizar el Sitio Web.
+
+                                    16.2 El presente Contrato tendrá una vigencia indefinida.
+
+                                    16.3 Salvo acuerdo por escrito entre las partes, cualquiera de ellas podrá rescindir el presente Contrato en cualquier momento, previa notificación por escrito. Para el caso de rescisión, el usuario acepta (i) que deberá continuar cumpliendo con los servicios necesarios para completar cualquier transacción abierta entre el usuario y otro miembro del Sitio, y (ii) que seguirá obligado a pagar a TDI y a Creativos cualquier servicio que haya iniciado, a fin de completar las transacciones. Una vez rescindida la cuenta del usuario, éste no tendrá acceso a datos, mensajes, archivos o cualquier otro material en el Sitio; TDI estará facultado para eliminar el material de la cuenta del usuario en su totalidad.
+
+                                    DÉCIMO SÉPTIMA. Políticas del sitio.
+                                    17.1 La Política de Privacidad forma parte de estos Términos y Condiciones.
+
+                                    De igual manera, será parte integrante de estos Términos y Condiciones, las Cláusulas relacionadas con la propiedad industrial e intelectual de los Torneos ofrecidos en la página de internet www.torneodeideas.com. Dichas cláusulas se localizan en http://torneodeideas.com/ayuda/
+
+                                    TDI se reserva el derecho de modificar estas políticas en cualquier momento, a su exclusiva discreción. Las modificaciones surtirán efecto a partir de su publicación en el Sitio.
+
+                                    DÉCIMA OCTAVA. Disposiciones generales.
+                                    18.1 Crowd Solutions S.A.P.I. de C.V. tiene su domicilio en la Ciudad de México, Distrito Federal. Las partes se someten expresamente a las leyes y tribunales del Distrito Federal en materia común, y leyes aplicables en materia federal. En este acto, renuncian expresamente a cualquier fuero que pudiera corresponderles en razón de su domicilio presente o futuro, o por cualquier otra causa.
+
+                                    18.2 TDI se reserva el derecho para modificar estos Términos y Condiciones en cualquier momento, a su exclusiva discreción. Las modificaciones surtirán efecto en el momento en que sean publicadas dentro del Sitio. El usuario podrá conocer la versión más actualizada de estos Términos y Condiciones en http://torneodeideas.com/ayuda.contenido/seccion,terminos_condiciones/. El continuo uso de este Sitio y sus servicios constituirá la aceptación tácita del usuario respecto de las modificaciones a este documento.
+
+                                    18.3 TDI no garantiza que el Sitio sea apropiado o esté disponible para su uso en otras jurisdicciones. El usuario se obliga a cumplir todas las leyes, normativas, ordenanzas y reglamentos locales, estatales, federales y nacionales que se apliquen al uso del Sitio y sus servicios según las leyes de su domicilio o las que en su caso sean aplicables de conformidad con la legislación de su nacionalidad.
+
+                                    18.4 Ninguna demora por parte de TDI en el ejercicio de sus derechos o recursos legales perjudicará sus derechos ni se interpretará como un deslinde de responsabilidad.
+
+                                    18.5 Las partes no serán responsables por la falta de cumplimiento o demora en el cumplimiento de cualquier obligación a causa de disturbios laborales, accidentes, incendios, inundaciones, fallas en telecomunicaciones o Internet, huelgas, guerras, disturbios, rebeliones, bloqueos, actos de gobierno, requerimientos gubernamentales, requerimientos o regulaciones por ley o autoridad, o cualquier otra situación de caso fortuito o fuerza mayor.
+
+                                    18.6 Los encabezados o títulos de este Contrato se incluyen únicamente para facilitar la referencia, y no limitan o afectan de otra manera los términos y las condiciones de este Contrato.
+                                    18.7 Estos Términos y Condiciones comprenden el acuerdo entre el usuario y Torneo de Ideas respecto al uso del Sitio y sus servicios, y reemplazará cualquier acuerdo previo entre las partes sobre la materia contenida en este documento.
+                                </p>
+                            </h6>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Aceptar los terminos y referencias"/>
+                                <p:selectBooleanCheckbox id="ch" required="true" requiredMessage="Debe aceptar los terminos del torneo"/>
+                            </p:panelGrid>
+                        </p:scrollPanel>
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{jugadorEquipoController.create}" value="#{bundle.Save}" update="display,:JugadorEquipoListForm:datalist,:growl" oncomplete="handleSubmit(args,'JugadorEquipoCreateDialog');"/>
+                            <p:commandButton value="#{bundle.Cancel}" onclick="PF('JugadorEquipoCreateDialog').hide()" type="reset" update="@this"/>
+                        </f:facet>
+                    </p:panelGrid>
+
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

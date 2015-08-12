@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AnotacionCreateDlg" widgetVar="AnotacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAnotacionTitle}">
+            <h:form id="AnotacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{anotacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAnotacionLabel_anotacionPK_idAnotacion}" for="anotacionPK_idAnotacion" />
+                        <p:inputText id="anotacionPK_idAnotacion" value="#{anotacionController.selected.anotacionPK.idAnotacion}" title="#{bundle.CreateAnotacionTitle_anotacionPK_idAnotacion}" required="true" requiredMessage="#{bundle.CreateAnotacionRequiredMessage_anotacionPK_idAnotacion}"/>
+                        <p:outputLabel value="#{bundle.CreateAnotacionLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{anotacionController.selected.cantidad}" title="#{bundle.CreateAnotacionTitle_cantidad}" />
+                        <p:outputLabel value="#{bundle.CreateAnotacionLabel_observacion}" for="observacion" />
+                        <p:inputText id="observacion" value="#{anotacionController.selected.observacion}" title="#{bundle.CreateAnotacionTitle_observacion}" />
+                        <p:outputLabel value="#{bundle.CreateAnotacionLabel_partido}" for="partido" />
+                        <p:selectOneMenu id="partido" value="#{anotacionController.selected.partido}" required="true" requiredMessage="#{bundle.EditAnotacionRequiredMessage_partido}">
+                            <f:selectItems value="#{partidoController.itemsAvailableSelectOne}"
+                                           var="partidoItem"
+                                           itemValue="#{partidoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAnotacionLabel_jugadorEquipo}" for="jugadorEquipo" />
+                        <p:selectOneMenu id="jugadorEquipo" value="#{anotacionController.selected.jugadorEquipo}" required="true" requiredMessage="#{bundle.EditAnotacionRequiredMessage_jugadorEquipo}">
+                            <f:selectItems value="#{jugadorEquipoController.itemsAvailableSelectOne}"
+                                           var="jugadorEquipoItem"
+                                           itemValue="#{jugadorEquipoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{anotacionController.create}" value="#{bundle.Save}" update="display,:AnotacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'AnotacionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('AnotacionCreateDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

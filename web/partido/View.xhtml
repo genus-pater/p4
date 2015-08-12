@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PartidoViewDlg" widgetVar="PartidoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPartidoTitle}">
+            <h:form id="PartidoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{partidoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPartidoLabel_partidoPK_idPartido}"/>
+                        <h:outputText value="#{partidoController.selected.partidoPK.idPartido}" title="#{bundle.ViewPartidoTitle_partidoPK_idPartido}"/>
+                        <h:outputText value="#{bundle.ViewPartidoLabel_nueroPartido}"/>
+                        <h:outputText value="#{partidoController.selected.nueroPartido}" title="#{bundle.ViewPartidoTitle_nueroPartido}"/>
+                        <h:outputText value="#{bundle.ViewPartidoLabel_equiposAJugar}"/>
+                        <h:outputText value="ENCUENTRO:#{partidoController.selected.equiposAJugar.encuentro.idEncuentro}-#{partidoController.selected.equiposAJugar.encuentro.fecha}-#{partidoController.selected.equiposAJugar.inscripcion.equipo.nombre}-#{partidoController.selected.equiposAJugar.encuentro.disciplinaTorneo.disciplina.nombre}-#{partidoController.selected.equiposAJugar.encuentro.disciplinaTorneo.torneo.descripcion}" title="#{bundle.ViewPartidoTitle_equiposAJugar}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('PartidoViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

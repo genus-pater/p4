@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClasificatoriaCreateDlg" widgetVar="ClasificatoriaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateClasificatoriaTitle}">
+            <h:form id="ClasificatoriaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clasificatoriaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateClasificatoriaLabel_clasificatoriaPK_idClasificatoria}" for="clasificatoriaPK_idClasificatoria" />
+                        <p:inputText id="clasificatoriaPK_idClasificatoria" value="#{clasificatoriaController.selected.clasificatoriaPK.idClasificatoria}" title="#{bundle.CreateClasificatoriaTitle_clasificatoriaPK_idClasificatoria}" required="true" requiredMessage="#{bundle.CreateClasificatoriaRequiredMessage_clasificatoriaPK_idClasificatoria}"/>
+                        <p:outputLabel value="#{bundle.CreateClasificatoriaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{clasificatoriaController.selected.descripcion}" title="#{bundle.CreateClasificatoriaTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateClasificatoriaLabel_tipoClasificatoria}" for="tipoClasificatoria" />
+                        <p:selectOneMenu id="tipoClasificatoria" value="#{clasificatoriaController.selected.tipoClasificatoria}" required="true" requiredMessage="#{bundle.EditClasificatoriaRequiredMessage_tipoClasificatoria}">
+                            <f:selectItems value="#{tipoClasificatoriaController.itemsAvailableSelectOne}"
+                                           var="tipoClasificatoriaItem"
+                                           itemValue="#{tipoClasificatoriaItem}" itemLabel="#{tipoClasificatoriaItem.descripcion}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateClasificatoriaLabel_inscripcion}" for="inscripcion" />
+                        <p:selectOneMenu id="inscripcion" value="#{clasificatoriaController.selected.inscripcion}" required="true" requiredMessage="#{bundle.EditClasificatoriaRequiredMessage_inscripcion}">
+                            <f:selectItems value="#{inscripcionController.itemsAvailableSelectOne}"
+                                           var="inscripcionItem"
+                                           itemValue="#{inscripcionItem}" itemLabel="#{inscripcionItem.equipo.nombre}-#{inscripcionItem.disciplinaTorneo.disciplina.nombre}#{inscripcionItem.disciplinaTorneo.torneo.descripcion}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateClasificatoriaLabel_idEstadoClasificatoria}" for="idEstadoClasificatoria" />
+                        <p:selectOneMenu id="idEstadoClasificatoria" value="#{clasificatoriaController.selected.idEstadoClasificatoria}" >
+                            <f:selectItems value="#{estadoClasificatoriaController.itemsAvailableSelectOne}"
+                                           var="idEstadoClasificatoriaItem"
+                                           itemValue="#{idEstadoClasificatoriaItem}" itemLabel="#{idEstadoClasificatoriaItem.descripcion}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clasificatoriaController.create}" value="#{bundle.Save}" update="display,:ClasificatoriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClasificatoriaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ClasificatoriaCreateDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

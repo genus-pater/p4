@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AnotacionViewDlg" widgetVar="AnotacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAnotacionTitle}">
+            <h:form id="AnotacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{anotacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAnotacionLabel_anotacionPK_idAnotacion}"/>
+                        <h:outputText value="#{anotacionController.selected.anotacionPK.idAnotacion}" title="#{bundle.ViewAnotacionTitle_anotacionPK_idAnotacion}"/>
+                        <h:outputText value="#{bundle.ViewAnotacionLabel_cantidad}"/>
+                        <h:outputText value="#{anotacionController.selected.cantidad}" title="#{bundle.ViewAnotacionTitle_cantidad}"/>
+                        <h:outputText value="#{bundle.ViewAnotacionLabel_observacion}"/>
+                        <h:outputText value="#{anotacionController.selected.observacion}" title="#{bundle.ViewAnotacionTitle_observacion}"/>
+                        <h:outputText value="#{bundle.ViewAnotacionLabel_partido}"/>
+                        <h:outputText value="#{anotacionController.selected.partido}" title="#{bundle.ViewAnotacionTitle_partido}"/>
+                        <h:outputText value="#{bundle.ViewAnotacionLabel_jugadorEquipo}"/>
+                        <h:outputText value="#{anotacionController.selected.jugadorEquipo}" title="#{bundle.ViewAnotacionTitle_jugadorEquipo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('AnotacionViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

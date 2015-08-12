@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DisciplinaCreateDlg" widgetVar="DisciplinaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDisciplinaTitle}">
+            <h:form id="DisciplinaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{disciplinaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDisciplinaLabel_idDiscilina}" for="idDiscilina" />
+                        <p:inputText id="idDiscilina" value="#{disciplinaController.selected.idDiscilina}" title="#{bundle.CreateDisciplinaTitle_idDiscilina}" required="true" requiredMessage="#{bundle.CreateDisciplinaRequiredMessage_idDiscilina}"/>
+                        <p:outputLabel value="#{bundle.CreateDisciplinaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{disciplinaController.selected.nombre}" title="#{bundle.CreateDisciplinaTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateDisciplinaLabel_estado}" for="estado" />
+                        <p:selectBooleanCheckbox id="estado" value="#{disciplinaController.selected.estado}" />
+                        <p:outputLabel value="#{bundle.CreateDisciplinaLabel_costo}" for="costo" />
+                        <p:inputText id="costo" value="#{disciplinaController.selected.costo}" title="#{bundle.CreateDisciplinaTitle_costo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{disciplinaController.create}" value="#{bundle.Save}" update="display,:DisciplinaListForm:datalist,:growl" oncomplete="handleSubmit(args,'DisciplinaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('DisciplinaCreateDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

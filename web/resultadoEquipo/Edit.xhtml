@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ResultadoEquipoEditDlg" widgetVar="ResultadoEquipoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditResultadoEquipoTitle}">
+            <h:form id="ResultadoEquipoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{resultadoEquipoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditResultadoEquipoLabel_resultadoEquipo}" for="resultadoEquipo" />
+                        <p:inputText id="resultadoEquipo" value="#{resultadoEquipoController.selected.resultadoEquipo}" title="#{bundle.EditResultadoEquipoTitle_resultadoEquipo}" />
+                        <p:outputLabel value="#{bundle.EditResultadoEquipoLabel_partido}" for="partido" />
+                        <p:selectOneMenu id="partido" value="#{resultadoEquipoController.selected.partido}" required="true" requiredMessage="#{bundle.EditResultadoEquipoRequiredMessage_partido}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{partidoController.itemsAvailableSelectOne}"
+                                           var="partidoItem"
+                                           itemValue="#{partidoItem}"  itemLabel="PARTIDO:#{partidoItem.nueroPartido}-#{partidoItem.equiposAJugar.encuentro.fecha}-#{partidoItem.equiposAJugar.inscripcion.equipo.nombre}-#{partidoItem.equiposAJugar.inscripcion.disciplinaTorneo.disciplina.nombre}-#{partidoItem.equiposAJugar.inscripcion.disciplinaTorneo.torneo.descripcion}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{resultadoEquipoController.update}" value="#{bundle.Save}" update="display,:ResultadoEquipoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ResultadoEquipoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ResultadoEquipoEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

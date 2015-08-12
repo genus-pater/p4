@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TorneoViewDlg" widgetVar="TorneoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTorneoTitle}">
+            <h:form id="TorneoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{torneoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTorneoLabel_idTorneo}"/>
+                        <h:outputText value="#{torneoController.selected.idTorneo}" title="#{bundle.ViewTorneoTitle_idTorneo}"/>
+                        <h:outputText value="#{bundle.ViewTorneoLabel_fechaInicio}"/>
+                        <h:outputText value="#{torneoController.selected.fechaInicio}" title="#{bundle.ViewTorneoTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTorneoLabel_fechaFin}"/>
+                        <h:outputText value="#{torneoController.selected.fechaFin}" title="#{bundle.ViewTorneoTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTorneoLabel_descripcion}"/>
+                        <h:outputText value="#{torneoController.selected.descripcion}" title="#{bundle.ViewTorneoTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewTorneoLabel_estado}"/>
+                        <p:selectBooleanCheckbox value="#{torneoController.selected.estado}" disabled="true"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('TorneoViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

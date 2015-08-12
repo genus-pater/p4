@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquipoEditDlg" widgetVar="EquipoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEquipoTitle}">
+            <h:form id="EquipoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equipoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEquipoLabel_idEquipo}" for="idEquipo" />
+                        <p:inputText id="idEquipo" value="#{equipoController.selected.idEquipo}" title="#{bundle.EditEquipoTitle_idEquipo}" required="true" requiredMessage="#{bundle.EditEquipoRequiredMessage_idEquipo}"/>
+                        <p:outputLabel value="#{bundle.EditEquipoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{equipoController.selected.nombre}" title="#{bundle.EditEquipoTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditEquipoLabel_idEscuela}" for="idEscuela" />
+                        <p:selectOneMenu id="idEscuela" value="#{equipoController.selected.idEscuela}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{escuelaController.itemsAvailableSelectOne}"
+                                           var="idEscuelaItem"
+                                           itemValue="#{idEscuelaItem}" itemLabel="#{idEscuelaItem.nombre}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{equipoController.update}" value="#{bundle.Save}" update="display,:EquipoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EquipoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('EquipoEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

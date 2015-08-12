@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SancionEditDlg" widgetVar="SancionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSancionTitle}">
+            <h:form id="SancionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sancionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSancionLabel_idSancion}" for="idSancion" />
+                        <p:inputText id="idSancion" value="#{sancionController.selected.idSancion}" title="#{bundle.EditSancionTitle_idSancion}" required="true" requiredMessage="#{bundle.EditSancionRequiredMessage_idSancion}"/>
+                        <p:outputLabel value="#{bundle.EditSancionLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{sancionController.selected.nombre}" title="#{bundle.EditSancionTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditSancionLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{sancionController.selected.descripcion}" title="#{bundle.EditSancionTitle_descripcion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sancionController.update}" value="#{bundle.Save}" update="display,:SancionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SancionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SancionEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

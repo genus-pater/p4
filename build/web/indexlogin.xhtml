@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>HUN</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panel id="pnlAutenticar" style="margin-left: 0px; margin-right: 0px; background-image: url(resources/imagenes/fondologin.jpg); background-size: 100% 100%; background-position: top;background-repeat: no-repeat; border: none;">
+                <p:growl id="mensajes" autoUpdate="true"/>
+                <h:panelGrid columns="2" style=" width: 31%; margin-bottom: 30%; margin-top: 10%; margin-left: 15%; background-image: none; background-color: transparent;">
+                    <h:panelGrid columns="2" style="width: 100%;">
+                        <p:outputLabel value="Usuario:" style="font-weight: bold"/>
+                        <p:inputMask style="width: 70%" id="txtDocente" title="Digite su número de Cédula, El guión se agregará automáticamente" value="#{loginUsuario.usuario.ci}" mask="9999999999" required="true" requiredMessage="#{msnSeguridad.oblUsuario}" />
+                        <p:outputLabel value="Contraseña:" style="font-weight: bold"/>
+                        <p:inputText style="width: 70%" id="txtContrasenia" type="password" title="Por defecto son sus 4 ultimos dígitos incluido el guión" value="#{loginUsuario.clave}" required="true" requiredMessage="#{msnSeguridad.oblPassword}"/>
+                        
+                        <center>
+                            <p:commandButton id="btnAutentica" value="Iniciar sesión" action="#{loginUsuario.login}" style=" background-image:none; background-color: lightslategrey; color: white;"/>
+
+                        </center>
+                        <br/>
+                        
+                    </h:panelGrid>
+                </h:panelGrid>
+                <p:dock position="bottom" >
+                    <p:menuitem value="Contactanos" icon="/resources/imagenes/contacto.png" url="http://www.espoch.edu.ec" style="color: white;background-color: transparent" />
+                    <p:menuitem value="Facebook" icon="/resources/imagenes/facebook.png" url="https://www.facebook.com/estebanisrael.borjamendoza" style="color: white;background-color: transparent"/>
+                </p:dock>
+            </p:panel>
+            <p:blockUI block="pnlAutenticar" trigger="btnAutentica" >
+                AUTENTICANDO...<br/>
+                <p:graphicImage value="/resources/imagenes/loading.gif" style="background-color: transparent; width: 50px;height: 50px"/>
+            </p:blockUI>
+        </h:form>
+
+    </h:body>
+</html>
+

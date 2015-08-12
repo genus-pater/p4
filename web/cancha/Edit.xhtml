@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CanchaEditDlg" widgetVar="CanchaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCanchaTitle}">
+            <h:form id="CanchaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{canchaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCanchaLabel_idCancha}" for="idCancha" />
+                        <p:inputText id="idCancha" value="#{canchaController.selected.idCancha}" title="#{bundle.EditCanchaTitle_idCancha}" required="true" requiredMessage="#{bundle.EditCanchaRequiredMessage_idCancha}"/>
+                        <p:outputLabel value="#{bundle.EditCanchaLabel_ubicacion}" for="ubicacion" />
+                        <p:inputText id="ubicacion" value="#{canchaController.selected.ubicacion}" title="#{bundle.EditCanchaTitle_ubicacion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{canchaController.update}" value="#{bundle.Save}" update="display,:CanchaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CanchaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CanchaEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

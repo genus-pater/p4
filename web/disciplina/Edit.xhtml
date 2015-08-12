@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DisciplinaEditDlg" widgetVar="DisciplinaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDisciplinaTitle}">
+            <h:form id="DisciplinaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{disciplinaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDisciplinaLabel_idDiscilina}" for="idDiscilina" />
+                        <p:inputText id="idDiscilina" value="#{disciplinaController.selected.idDiscilina}" title="#{bundle.EditDisciplinaTitle_idDiscilina}" required="true" requiredMessage="#{bundle.EditDisciplinaRequiredMessage_idDiscilina}"/>
+                        <p:outputLabel value="#{bundle.EditDisciplinaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{disciplinaController.selected.nombre}" title="#{bundle.EditDisciplinaTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditDisciplinaLabel_estado}" for="estado" />
+                        <p:selectBooleanCheckbox id="estado" value="#{disciplinaController.selected.estado}" />
+                        <p:outputLabel value="#{bundle.EditDisciplinaLabel_costo}" for="costo" />
+                        <p:inputText id="costo" value="#{disciplinaController.selected.costo}" title="#{bundle.EditDisciplinaTitle_costo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{disciplinaController.update}" value="#{bundle.Save}" update="display,:DisciplinaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DisciplinaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('DisciplinaEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

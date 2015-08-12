@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquiposAJugarEditDlg" widgetVar="EquiposAJugarEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEquiposAJugarTitle}">
+            <h:form id="EquiposAJugarEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equiposAJugarController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEquiposAJugarLabel_equiposAJugarPK_idEquiposAJugar}" for="equiposAJugarPK_idEquiposAJugar" />
+                        <p:inputText id="equiposAJugarPK_idEquiposAJugar" value="#{equiposAJugarController.selected.equiposAJugarPK.idEquiposAJugar}" title="#{bundle.EditEquiposAJugarTitle_equiposAJugarPK_idEquiposAJugar}" required="true" requiredMessage="#{bundle.EditEquiposAJugarRequiredMessage_equiposAJugarPK_idEquiposAJugar}"/>
+                        <p:outputLabel value="#{bundle.EditEquiposAJugarLabel_numeroParticipante}" for="numeroParticipante" />
+                        <p:inputText id="numeroParticipante" value="#{equiposAJugarController.selected.numeroParticipante}" title="#{bundle.EditEquiposAJugarTitle_numeroParticipante}" />
+                        <p:outputLabel value="#{bundle.EditEquiposAJugarLabel_inscripcion}" for="inscripcion" />
+                        <p:selectOneMenu id="inscripcion" value="#{equiposAJugarController.selected.inscripcion}" required="true" requiredMessage="#{bundle.EditEquiposAJugarRequiredMessage_inscripcion}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{inscripcionController.itemsAvailableSelectOne}"
+                                           var="inscripcionItem"
+                                           itemValue="#{inscripcionItem}" itemLabel="#{inscripcionItem.equipo.nombre}-#{inscripcionItem.disciplinaTorneo.disciplina.nombre}-#{inscripcionItem.disciplinaTorneo.torneo.descripcion}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEquiposAJugarLabel_encuentro}" for="encuentro" />
+                        <p:selectOneMenu id="encuentro" value="#{equiposAJugarController.selected.encuentro}" required="true" requiredMessage="#{bundle.EditEquiposAJugarRequiredMessage_encuentro}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{encuentroController.itemsAvailableSelectOne}"
+                                           var="encuentroItem"
+                                           itemValue="#{encuentroItem}" itemLabel="#{encuentroItem.fecha}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{equiposAJugarController.update}" value="#{bundle.Save}" update="display,:EquiposAJugarListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EquiposAJugarEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('EquiposAJugarEditDialog').hide()" type="reset" update="@this"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
