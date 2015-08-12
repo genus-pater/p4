@@ -11,15 +11,15 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-08-11T21:19:34")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-08-12T08:13:10")
 @StaticMetamodel(DisciplinaTorneo.class)
 public class DisciplinaTorneo_ { 
 
-    public static volatile SingularAttribute<DisciplinaTorneo, DisciplinaTorneoPK> disciplinaTorneoPK;
-    public static volatile SingularAttribute<DisciplinaTorneo, Torneo> torneo;
-    public static volatile SingularAttribute<DisciplinaTorneo, Disciplina> disciplina;
     public static volatile SingularAttribute<DisciplinaTorneo, Date> fecha;
-    public static volatile ListAttribute<DisciplinaTorneo, Encuentro> encuentroList;
+    public static volatile SingularAttribute<DisciplinaTorneo, Torneo> torneo;
+    public static volatile SingularAttribute<DisciplinaTorneo, DisciplinaTorneoPK> disciplinaTorneoPK;
+    public static volatile SingularAttribute<DisciplinaTorneo, Disciplina> disciplina;
     public static volatile ListAttribute<DisciplinaTorneo, Inscripcion> inscripcionList;
+    public static volatile ListAttribute<DisciplinaTorneo, Encuentro> encuentroList;
 
 }
